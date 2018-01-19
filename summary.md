@@ -12,7 +12,7 @@
   * [Array Types](/arrays.md)
   * [Tuple Types](/tuples.md)
   * [Class Types](/classes.md)
-  * [Type Aliases](/typeof.md)
+  * [Type Aliases](/aliases.md)
   * [Opaque Type Aliases](/opaque-types.md)
   * [Interface Types](/interfaces.md)
   * [Generic Types](/generics.md)
