@@ -2,11 +2,11 @@
 layout: guide
 ---
 
-In general, programs have several different categories of types:
+일반적으로, 프로그램은 여러가지 다른 종류의 타입을 가지고 있습니다:
 
-**A single type:**
+**싱글 타입:**
 
-Here the input value can only be a `number`.
+아래 코드에서 입력 값은 `number`만 올 수 있습니다.
 
 ```js
 function square(n: number) {
@@ -14,9 +14,9 @@ function square(n: number) {
 }
 ```
 
-**A group of different possible types:**
+**다른 허용 가능한 타입들의 그룹:**
 
-Here the input value could be either a `string` or a `number`.
+아래 코드에서 입력 값은 `string`이나 `number`가 될 수 있습니다.
 
 ```js
 function stringifyBasicValue(value: string | number) {
@@ -24,10 +24,9 @@ function stringifyBasicValue(value: string | number) {
 }
 ```
 
-**A type based on another type:**
+**다른 타입을 기반으로 한 타입:**
 
-Here the return type will be the same as the type of whatever value is passed
-into the function.
+아래 코드에서 반환 타입은 함수의 입력 값의 타입에 따라 결정 됩니다.
 
 ```js
 function identity<T>(value: T): T {
@@ -35,12 +34,13 @@ function identity<T>(value: T): T {
 }
 ```
 
-These three are the most common categories of types. They will make up the
-majority of the types you'll be writing.
+이러한 세 가지가 가장 일반적인 타입의 종류입니다. 이들은 여러분이 작성하는 타입의 대다수를 차지하게 될 것입니다.
 
-However, there is also a fourth category.
+하지만 다른 한 종류가 더 있습니다.
 
-**An arbitrary type that could be anything:**
+**어떤 것이든 될 수 있는 임의의 타입:**
+
+아래 코드에서 전달된 값에 대한 타입은 알 수 없습니다. 어떠한 타입이 오더라도 함수는 정상적으로 동작하게 됩니다.
 
 Here the passed in value is an unknown type, it could be any type and the
 function would still work.
@@ -51,14 +51,13 @@ function getTypeOf(value: mixed): string {
 }
 ```
 
-These unknown types are less common, but are still useful at times.
+이러한 알 수 없는 타입은 흔하지 않지만 때로는 유용합니다.
 
-You should represent these values with `mixed`.
+이러한 값을 `mixed`라고 표현합니다.
 
-## Anything goes in, Nothing comes out <a class="toc" id="toc-anything-goes-in-nothing-comes-out" href="#toc-anything-goes-in-nothing-comes-out"></a>
+## 아무거나 들어올 수 있지만 아무것도 나갈 수 없다 <a class="toc" id="toc-anything-goes-in-nothing-comes-out" href="#toc-anything-goes-in-nothing-comes-out"></a>
 
-`mixed` will accept any type of value. Strings, numbers, objects, functions–
-anything will work.
+`mixed`는 어떠한 타입도 받을 수 있습니다. 문자열, 숫자, 객체, 함수 어떤 것이든 상관 없습니다.
 
 ```js
 // @flow
@@ -72,8 +71,7 @@ stringify(null);
 stringify({});
 ```
 
-When you try to use a value of a `mixed` type you must first figure out what
-the actual type is or you'll end up with an error.
+`mixed` 타입의 값을 사용할 때 반드시 실제 타입이 무엇인지 알아야 하며 그렇지 않으면 에러를 발생하게 됩니다.
 
 ```js
 // @flow
@@ -85,7 +83,7 @@ function stringify(value: mixed) {
 stringify("foo");
 ```
 
-Instead you must ensure the value is a certain type by refining it.
+대신 해당 값이 특정 타입이라는 것을 정제하는 과정이 있어야 합니다.
 
 ```js
 // @flow
@@ -100,6 +98,4 @@ function stringify(value: mixed) {
 stringify("foo");
 ```
 
-Because of the `typeof value === 'string'` check, Flow knows the `value` can
-only be a `string` inside of the `if` statement. This is known as a
-[refinement](../../lang/refinements/).
+`typeof value === 'string'`이라는 체크 때문에 flow는 `value`가 `if`문 안에서 `string`이라는 것을 알 수 있습니다. 이런걸 [refinement](../../lang/refinements)라고 합니다.
