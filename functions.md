@@ -2,8 +2,7 @@
 layout: guide
 ---
 
-Functions have two places where types are applied: Parameters (input) and the
-return value (output).
+함수는 타입이 적용되는 곳이 둘 있습니다: 파라미터(입력)과 반환값(결과)
 
 ```js
 // @flow
@@ -16,7 +15,8 @@ concat("foo", "bar"); // Works!
 concat(true, false);  // Error!
 ```
 
-Using inference, these types are often optional:
+추론을 통해서 타입은 선택적이 될 수 있습니다:
+
 
 ```js
 // @flow
@@ -29,8 +29,7 @@ concat("foo", "bar"); // Works!
 concat(true, false);  // Error!
 ```
 
-Sometimes Flow's inference will create types that are more permissive than you
-want them to be.
+때로는 flow의 추론이 의도한 것보다 더 관대한 타입을 생성합니다.
 
 ```js
 // @flow
@@ -42,17 +41,16 @@ concat("foo", "bar"); // Works!
 concat(1, 2);         // Works!
 ```
 
-For that reason (and others), it's useful to write types for important
-functions.
+이런 이유료, 중요한 함수에 대해서 타입을 쓰는게 유용합니다.
 
-## Syntax of functions <a class="toc" id="toc-syntax-of-functions" href="#toc-syntax-of-functions"></a>
+## 함수의 문법 <a class="toc" id="toc-syntax-of-functions" href="#toc-syntax-of-functions"></a>
 
-There are three forms of functions that each have their own slightly different syntax.
+함수를 만드는 방법은 3가지가 있습니다.
 
-### Function Declarations <a class="toc" id="toc-function-declarations" href="#toc-function-declarations"></a>
 
-Here you can see the syntax for function declarations with and without types
-added.
+### 함수 선언 <a class="toc" id="toc-function-declarations" href="#toc-function-declarations"></a>
+
+타입을 추가하거나 하지 않은 함수 선언 문법이 있습니다.
 
 ```js
 function method(str, bool, ...nums) {
@@ -64,9 +62,9 @@ function method(str: string, bool?: boolean, ...nums: Array<number>): void {
 }
 ```
 
-### Arrow Functions <a class="toc" id="toc-arrow-functions" href="#toc-arrow-functions"></a>
+### Arrow 함수 <a class="toc" id="toc-arrow-functions" href="#toc-arrow-functions"></a>
 
-Here you can see the syntax for arrow functions with and without types added.
+타입을 추가하거나 하지 않은 함수 선언 문법이 있습니다.
 
 ```js
 let method = (str, bool, ...nums) => {
@@ -78,21 +76,21 @@ let method = (str: string, bool?: boolean, ...nums: Array<number>): void => {
 };
 ```
 
-### Function Types <a class="toc" id="toc-function-types" href="#toc-function-types"></a>
+### 함수 타입 <a class="toc" id="toc-function-types" href="#toc-function-types"></a>
 
-Here you can see the syntax for writing types that are functions.
+함수의 타입을 작성하는 문법은 아래와 같습니다.
 
 ```js
 (str: string, bool?: boolean, ...nums: Array<number>) => void
 ```
 
-You may also optionally leave out the parameter names.
+파마리터 명를 선택적으로 뺄 수도 있습니다.
 
 ```js
 (string, boolean | void, Array<number>) => void
 ```
 
-You might use these functions types for something like a callback.
+콜백같은 것에 대한 함수 타입을 사용할 수 있습니다.
 
 ```js
 function method(callback: (error: Error | null, value: string | null) => void) {
@@ -100,10 +98,9 @@ function method(callback: (error: Error | null, value: string | null) => void) {
 }
 ```
 
-## Function Parameters <a class="toc" id="toc-function-parameters" href="#toc-function-parameters"></a>
+## 함수 파라미터 <a class="toc" id="toc-function-parameters" href="#toc-function-parameters"></a>
 
-Function parameters can have types by adding a colon `:` followed by the type
-after the name of the parameter.
+함수 파마리터는 파마리터 명 뒤에 `:`를 붙여서 타입을 명시할 수 있습니다.
 
 ```js
 function method(param1: string, param2: boolean) {
@@ -111,10 +108,9 @@ function method(param1: string, param2: boolean) {
 }
 ```
 
-## Optional Parameters <a class="toc" id="toc-optional-parameters" href="#toc-optional-parameters"></a>
+## 선택적 파라미터 <a class="toc" id="toc-optional-parameters" href="#toc-optional-parameters"></a>
 
-You can also have optional parameters by adding a question mark `?` after the
-name of the parameter and before the colon `:`.
+선태적 파마리터의 경우 파라미터 명 뒤에 그리고 `:`앞에 `?`를 붙여줍니다.
 
 ```js
 function method(optionalValue?: string) {
@@ -122,8 +118,7 @@ function method(optionalValue?: string) {
 }
 ```
 
-Optional parameters will accept missing, `undefined`, or matching types. But
-they will not accept `null`.
+선택적 파마리터는 파라미터가 없거나, `undefined` 혹은 매칭된 타입을 받을 수 있지만 `null`을 받지는 않습니다.
 
 ```js
 // @flow
@@ -138,14 +133,11 @@ method("string");  // Works.
 method(null);      // Error!
 ```
 
-### Rest Parameters <a class="toc" id="toc-rest-parameters" href="#toc-rest-parameters"></a>
+### Rest 파라미터 <a class="toc" id="toc-rest-parameters" href="#toc-rest-parameters"></a>
 
-JavaScript also supports having rest parameters or parameters that collect an
-array of arguments at the end of a list of parameters. These have an ellipsis
-`...` before them.
+자바스립트는 rest 파라미터 혹은 리스트의 끝에서 인자의 배열을 모은 파라미터를 지원합니다. 이들 앞에는 말줄임표(`...`)을 사용합니다.
 
-You can also add type annotations for rest parameters using the same syntax but
-with an `Array`.
+같은 문법을 이용해서 rest 파라미터의 타입 어노테이션을 추가할 수 있습니다.
 
 ```js
 function method(...args: Array<number>) {
@@ -153,7 +145,7 @@ function method(...args: Array<number>) {
 }
 ```
 
-You can pass as many arguments as you want into a rest parameter.
+원하는 만큼의 인자를 rest 파라미터로 보낼 수 있씁니다.
 
 ```js
 // @flow
@@ -167,13 +159,12 @@ method(1, 2);    // Works.
 method(1, 2, 3); // Works.
 ```
 
-> Note: If you add a type annotation to a rest parameter, it must always
-> explicitly be an `Array` type.
+> Note: 만약 rest 파라미터에 타입 어노테이션을 추가한다면
+> 항상 명시적으로 `Array` 타입이어야 합니다.
 
-### Function Returns <a class="toc" id="toc-function-returns" href="#toc-function-returns"></a>
+### 함수 반환 <a class="toc" id="toc-function-returns" href="#toc-function-returns"></a>
 
-Function returns can also add a type using a colon `:` followed by the type
-after the list of parameters.
+함수 반환도 인자 목록 뒤에 `:`을 추가할 수 있습니다.
 
 ```js
 function method(): number {
@@ -181,9 +172,7 @@ function method(): number {
 }
 ```
 
-Return types ensure that every branch of your function returns the same type.
-This prevents you from accidentally not returning a value under certain
-conditions.
+반환 타입이 함수의 모든 조건이 같은 타입을 반환해야 합니다. 이는 우연히 특정 조건에서 값을 반환하지 않는 것을 방지할 수 있습니다.
 
 ```js
 // @flow
@@ -195,13 +184,12 @@ function method(): boolean {
 }
 ```
 
-### Function `this` <a class="toc" id="toc-function-this" href="#toc-function-this"></a>
+### 함수 `this` <a class="toc" id="toc-function-this" href="#toc-function-this"></a>
 
-Every function in JavaScript can be called with a special context named `this`.
-You can call a function with any context that you want.
+자바스크립트에서 모든 함수는 `this`라는 특별한 컨택스트와 함께 호출됩니다. 원하는 어떤 컨택스트릉 이용해서 함수를 호출할 수 있습니다.
 
-In Flow you don't type annotate `this` and Flow will check whatever context you
-call the function with.
+flow는 `this`의 타입을 명시하지 않고 함수와 함께 허출되는 어떤 컨텍스트든 체크할 것입니다.
+
 
 ```js
 function method() {
@@ -213,9 +201,9 @@ var num: number = method.call(42);
 var str: string = method.call(42);
 ```
 
-### Predicate Functions <a class="toc" id="toc-function-checks" href="#toc-predicate-functions"></a>
+### Predicate 함수 <a class="toc" id="toc-function-checks" href="#toc-predicate-functions"></a>
 
-Sometimes you will want to move the condition from an `if` statement into a function:
+땨로 조건을 `if`문에서 별도의 함수로 이동하고 싶을 수 있습니다.
 
 ```js
 function concat(a: ?string, b: ?string): string {
@@ -226,7 +214,7 @@ function concat(a: ?string, b: ?string): string {
 }
 ```
 
-However, Flow will flag an error in the code below:
+그러나 flow는 아래 코드에서 에러를 표시합니다:
 
 ```js
 function truthy(a, b): boolean {
@@ -242,8 +230,8 @@ function concat(a: ?string, b: ?string): string {
 }
 ```
 
-You can fix this by making `truthy` a *predicate function*, by using
-the `%checks` annotation like so:
+이 에러는 아래와 같이 `%checks` 어노테이션을 사용해서 truthy`를 *predicate 함수*로 만들어서 고칠 수 있습니다.
+
 
 ```js
 function truthy(a, b): boolean %checks {
@@ -258,9 +246,7 @@ function concat(a: ?string, b: ?string): string {
 }
 ```
 
-The body of these predicate functions need to be expressions (i.e. local variable declarations are not supported).
-But it's possible to call other predicate functions inside a predicate function.
-For example:
+predicate 함수의 내부는 표현식이어야 한다(예를 들면, 로컬 변수는 허용하지 않는다). 그러나 predicate 함수 내부에서 다른 predicate 함수를 호출 할 수 있다. 예를 들면:
 
 ```js
 function isString(y): %checks {
@@ -289,10 +275,9 @@ foo([]);
 ```
 
 
-### `Function` Type <a class="toc" id="toc-function-type" href="#toc-function-type"></a>
+### `Function` 타입 <a class="toc" id="toc-function-type" href="#toc-function-type"></a>
 
-Sometimes it is useful to write types that accept arbitrary functions, for
-those you should write `() => mixed` like this:
+때로는 임의의 함수를 받는 타입을 작성하는 것이 유용합니다. 이런 경우에는 아래와 같이 `() => mixed`를 사용합면 됩니다.
 
 ```js
 function method(func: () => mixed) {
@@ -300,11 +285,9 @@ function method(func: () => mixed) {
 }
 ```
 
-However, if you need to opt-out of the type checker, and don't want to go all
-the way to `any`, you can instead use `Function`. **`Function` is unsafe and
-should be avoided.**
+그러나 타입 검사를 사용하길 원치 않고 `any`로 간다면 `Function`을 사용하면 됩니다. **`Function`은 안전하지 않고 피해야 합니다.**
 
-For example, the following code will not report any errors:
+예를 들면, 다음 코드는 어떠한 에러도 알려주지 않습니다.
 
 ```js
 function method(func: Function) {
@@ -318,5 +301,4 @@ method(function(a: number, b: number) {
 });
 ```
 
-> ***You should follow [all the same rules](../any/) as `any` when using
-> `Function`.***.
+> ***`Function`을 사용할 때 `any`를 사용할 때와 [모두 같은 규칙](../any)을 사용해야 합니다.***
