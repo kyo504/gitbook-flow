@@ -2,21 +2,19 @@
 layout: guide
 ---
 
-When you are declaring a new variable, you may optionally declare its type.
+새로운 변수를 선언할 때, 변수의 타입을 선택적으로 선언할 수 있습니다.
 
-JavaScript has three ways of declaring local variables:
+자바스크립트는 로컬 변수를 선언하는 세 가지 방법이 있습니다.
 
-- `var` - declares a variable, optionally assigning a value.
-  ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var))
-- `let` - declares a block-scoped variable, optionally assigning a value.
-  ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let))
-- `const` - declares a block-scoped variable, assigning a value that cannot be re-assigned.
-  ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const))
+- `var` - 변수를 선언하는데 선택적으로 값을 할당한다. ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var))
+- `let` - block-scoped 변수를 선언하는데 선택적으로 값을 할당한다. ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let))
+- `const` - block-scoped 변수 재할당 할 수 없는 값을 할당한다. ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const))
 
-In Flow these fall into two groups:
+Flow에서는 두개의 그룹으로 나뉜다.
 
-- `let` and `var` - variables that **can** be reassigned.
-- `const` - variables that **cannot** be reassigned.
+- `let`과 `var` - 재할당 **할 수 있는** 변수들
+-  `const` - 재할당 **할 수 없는** 변수들
+
 
 ```js
 var varVariable = 1;
@@ -31,11 +29,9 @@ constVariable = 2; // Error!
 
 ## `const` <a class="toc" id="toc-const" href="#toc-const"></a>
 
-Since a `const` variable cannot be re-assigned at a later time it is fairly
-simple.
+`const` 변수는 나중에 재할당 할 수 없기 때문에 간단하다.
 
-Flow can either infer the type from the value you are assigning to it or you
-can provide it with a type.
+Flow는 변수에 할당한 값으로 부터 타입을 추론하거나 타입을 직접 제공할 수 있다.
 
 ```js
 // @flow
@@ -45,11 +41,9 @@ const bar: number = 2;
 
 ## `var` and `let` <a class="toc" id="toc-var-and-let" href="#toc-var-and-let"></a>
 
-Since `var` and `let` can be re-assigned, there's a few more rules you'll need
-to know about.
+`var`와 `let`은 재할당 할 수 있기 때문에 알아야 할 규칙이 조금 더 있습니다.
 
-Similar to `const`, Flow can either infer the type from the value you are
-assigning to it or you can provide it with a type:
+`const`와 유사하게 flow는 변수에 할당한 값을 통해서 타입을 추론하거나 변수에 타입을 제공할 수 있습니다.
 
 ```js
 // @flow
@@ -59,8 +53,7 @@ var barVar: number = 2;
 let barLet: number = 2;
 ```
 
-When you provide a type, you will be able to re-assign the value, but it must
-always be of a compatible type.
+타입을 제공할 때, 값을 재할당 할 수 있을 것입니다. 하지만 타입은 항상 호환가능한 타입이어야 합니다.
 
 ```js
 // @flow
@@ -70,13 +63,11 @@ foo = 2;   // Works!
 foo = "3"; // Error!
 ```
 
-When you do not provide a type, the inferred type will do one of two things if
-you re-assign it.
+타입을 제공하지 않을 때, 값을 재할당 한다면 추론된 타입은 둘 중에 하나가 될 것입니다.
 
-## Reassigning variables <a class="toc" id="toc-reassigning-variables" href="#toc-reassigning-variables"></a>
+## 변수 재할당하기 <a class="toc" id="toc-reassigning-variables" href="#toc-reassigning-variables"></a>
 
-By default when you re-assign a variable, Flow will give it the type of all
-possible assignments.
+기본적으로 변수를 재할당할 때 flow는 모든 할당 가능한 타입을 제시합니다.
 
 ```js
 let foo = 42;
@@ -87,8 +78,7 @@ if (Math.random()) foo = "hello";
 let isOneOf: number | boolean | string = foo; // Works!
 ```
 
-Sometimes Flow is able to figure out (with certainty) the type of a variable
-after re-assignment. In that case, Flow will give it the known type.
+때때로 flow는 재할당 이후에 변수의 타입을 확실하게 알 수도 있습니다. 이 경우에 flow는 알려진 타입을 제시합니다.
 
 ```js
 // @flow
@@ -102,8 +92,7 @@ foo = "hello";
 let isString: string = foo; // Works!
 ```
 
-If statements, functions, and other conditionally run code can all prevent Flow
-from being able to figure out precisely what a type will be.
+구문, 함수 그리고 조건에 따라 동작하는 코드는 모두 flow가 타입이 무엇인지 정확하게 알기 어렵게 합니다.
 
 ```js
 // @flow
@@ -120,4 +109,5 @@ mutate();
 let isString: string = foo; // Error!
 ```
 
-As Flow gets smarter and smarter there should be less of these scenarios.
+flow가 더 나아질수록 이러한 시나리오는 줄어들어야 할 것입니다.
+
