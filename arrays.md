@@ -2,11 +2,9 @@
 layout: guide
 ---
 
-> **Note:** Arrays are also sometimes used as tuples in JavaScript, these are
-> annotated differently in Flow. See the Tuple docs for more information.
+> **Note:** 배열 또한 떄때로 자바스크립트에서 tuple처럼 쓰입니다. 이 둘의 타입은 flow에서 다르게 기술됩니다. 더 많은 정보는 Tuple 문서를 참고하세요.
 
-Arrays are a special list-like type of object in JavaScript. You can create
-arrays a couple different ways.
+배열은 자바스크립트에서 특별한 리스트 같은 객체 타입입니다. 배열을 생성하는 방법은 몇 가지가 있습니다.
 
 ```js
 new Array(1, 2, 3); // [1, 2, 3];
@@ -14,7 +12,7 @@ new Array(3);       // [undefined, undefined, undefined]
 [1, 2, 3];          // [1, 2, 3];
 ```
 
-You can also create arrays and add values to them later on:
+또한 배열을 생성한 이후에 값을 추가할 수 있습니다.
 
 ```js
 let arr = []; // []
@@ -23,17 +21,15 @@ arr[1] = 2;   // [1, 2]
 arr[2] = 3;   // [1, 2, 3]
 ```
 
-## `Array` Type <a class="toc" id="toc-array-type" href="#toc-array-type"></a>
+## `Array` 타입 <a class="toc" id="toc-array-type" href="#toc-array-type"></a>
 
-To create an array type you can use `Array<Type>` type where `Type` is the type
-of elements in the array. For example, to create a type for an array of numbers
-you use `Array<number>`.
+배열 타입을 생성하려면 `Array<Type>` 타입을 사용하면 됩니다. 여기서 `Type`은 배열 안에 있는 원소의 타입입니다. 예를 들어, number의 배열에 대한 타입을 만들려면 `Array<number>`를 사용하면 됩니다.
 
 ```js
 let arr: Array<number> = [1, 2, 3];
 ```
 
-You can put any type within `Array<Type>`.
+`Array<Type>`안에는 어떠한 타입도 넣을 수 있습니다.
 
 ```js
 let arr1: Array<boolean> = [true, false, true];
@@ -41,15 +37,15 @@ let arr2: Array<string> = ["A", "B", "C"];
 let arr3: Array<mixed> = [1, true, "three"]
 ```
 
-## `Array` Type Shorthand Syntax <a class="toc" id="toc-array-type-shorthand-syntax" href="#toc-array-type-shorthand-syntax"></a>
+## `Array` 타입 약칭 문법 <a class="toc" id="toc-array-type-shorthand-syntax" href="#toc-array-type-shorthand-syntax"></a>
 
-There's also a slightly shorter form of this syntax: `Type[]`.
+위에서 언급한 문법을 간단하게 표기할 수 있습니다: `Type[]`.
 
 ```js
 let arr: number[] = [0, 1, 2, 3];
 ```
 
-Just note that `?Type[]` is the equivalent of `?Array<T>` and not `Array<?T>`.
+`?Type[]`는 `?Array<T>`와 동일하지만 `Array<?T>`는 아닙니다.
 
 ```js
 // @flow
@@ -58,7 +54,7 @@ let arr2: ?number[] = [1, 2]; // Works!
 let arr3: ?number[] = [null]; // Error!
 ```
 
-If you want to make it `Array<?T>` you can use parenthesis like: `(?Type)[]`
+`Array<?T>`를 만들려면 괄호를 사용하세요: `(?Ttype)[]`
 
 ```js
 // @flow
@@ -67,15 +63,13 @@ let arr2: (?number)[] = [1, 2]; // Works!
 let arr3: (?number)[] = [null]; // Works!
 ```
 
-## Array access is unsafe <a class="toc" id="toc-array-access-is-unsafe" href="#toc-array-access-is-unsafe"></a>
+## 배열 접근은 안전하지 않습니다. <a class="toc" id="toc-array-access-is-unsafe" href="#toc-array-access-is-unsafe"></a>
 
-When you retrieve an element from an array there is always a possibility that
-it is `undefined`. You could have either accessed an index which is out of the
-bounds of the array, or the element could not exist because it is a "sparse
-array".
+배열에서 원소를 취할 때 `undefined`의 가능성을 항상 인지해야 합니다. 배열의 범위를 넘어서는 인덱스를 접근하거나 배열이 "희소 배열(sparse array)" 이기 떄문에 존재하지 않는 원소를 접근할 수도 있습니다.
 
-For example, you could be accessing an element that is out of the bounds of the
-array.
+**Note:** 희소 배열은 배열에 속한 원소의 위치가 연속적이지 않은 배열을 말한다.
+
+예를 들면, 배열의 범위를 넘어서는 원소를 접근할 수 있습니다.
 
 ```js
 // @flow
@@ -84,8 +78,7 @@ let value: number = array[3]; // Works.
                        // ^ undefined
 ```
 
-Or you could be accessing an element that does not exist if it is a "sparse
-array".
+혹은 배열이 "희소 배열(sparse array)" 라면 존재하지 않는 원소에 접근할 수도 있습니다.
 
 ```js
 // @flow
@@ -98,12 +91,9 @@ let value: number = array[1]; // Works.
                        // ^ undefined
 ```
 
-In order to make this safe, Flow would have to mark every single array access
-as "*possibly undefined"*.
+안전하게 접근하기 위해서 flow는 모든 배열 접근에 대해서 "*possibly undefined*"라고 표시해야 합니다.
 
-Flow does not do this because it would be extremely inconvenient to use. You
-would be forced to refine the type of every value you get when accessing an
-array.
+flow는 사용하기에 너무 불편하기때문에 이를 지원하지 않습니다. 배열에 접근할 때 얻는 모든 값의 타입을 다듬어야 합니다.
 
 ```js
 let array: Array<number> = [0, 1, 2];
@@ -114,5 +104,4 @@ if (value !== undefined) {
 }
 ```
 
-As Flow is made to be smarter it may be possible in the future to fix this
-problem, but for now you should be aware of it.
+ flow가 진화함에 따라 나중에 이러한 문제는 해결될 수도 있습니다. 하지만 현재는 이를 개발자가 인지하고 있어야 합니다.
