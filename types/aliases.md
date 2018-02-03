@@ -2,8 +2,7 @@
 layout: guide
 ---
 
-When you have complicated types that you want to reuse in multiple places, you
-can alias them in Flow using a **type alias**.
+여라 위치에서 재사용이 필요한 복작한 타입을 가지고 있다면 **타입 별칭**을 사용하여 다른 이름을 사용할 수 있습니다.
 
 ```js
 // @flow
@@ -14,7 +13,7 @@ type MyObject = {
 };
 ```
 
-These type aliases can be used anywhere a type can be used.
+이런 타입 별칭은 타입을 사용할 수 있는 어느 곳에서든 사용할 수 있습니다.
 
 ```js
 // @flow
@@ -27,16 +26,15 @@ function method(val: MyObject) { /* ... */ }
 class Foo { constructor(val: MyObject) { /* ... */ } }
 ```
 
-## Type Alias Syntax <a class="toc" id="toc-type-alias-syntax" href="#toc-type-alias-syntax"></a>
+## 타입 별칭 문법 <a class="toc" id="toc-type-alias-syntax" href="#toc-type-alias-syntax"></a>
 
-Type aliases are created using the keyword `type` followed by its name, an
-equals sign `=`, and a type definition.
+타입 별칭은 `Type` 뒤에 이름, `=` 그리고 타입 정의를 기술하여 생성 할 수 있습니다.
 
 ```js
 type Alias = Type;
 ```
 
-Any type can appear inside a type alias.
+어떤 타입이든 타입 별팅 안에 표현할 수 있습니다.
 
 ```js
 type NumberAlias = number;
@@ -48,9 +46,9 @@ type UnionAlias = 1 | 2 | 3;
 type AliasAlias = ObjectAlias;
 ```
 
-#### Type Alias Generics <a class="toc" id="toc-type-alias-generics" href="#toc-type-alias-generics"></a>
+#### 타입 별칭 제너릭 <a class="toc" id="toc-type-alias-generics" href="#toc-type-alias-generics"></a>
 
-Type aliases can also have their own [generics](../generics/).
+타입 별칭은 자기 자신의 [generics](../generics)를 가질 수 있습니다.
 
 ```js
 type MyObject<A, B, C> = {
@@ -59,8 +57,7 @@ type MyObject<A, B, C> = {
 };
 ```
 
-Type alias generics are [parameterized](../generics/#toc-parameterized-generics).
-When you use a type alias you need to pass parameters for each of its generics.
+타입 별칭 제너릭은 [parameterized](../generics/#toc-parameterized-generics)될 수 있습니다. 타입 별칭을 사용할 때 각 제너릭에 대한 파라미터를 전달해야 합니다.
 
 ```js
 // @flow
