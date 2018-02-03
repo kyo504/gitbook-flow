@@ -2,11 +2,9 @@
 layout: guide
 ---
 
-JavaScript [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
-in Flow operate both as a value and a type.
+Flow에서 자바스크립트 [클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)는 값과 타입 둘 모두로 동작합니다.
 
-You write classes the same way you would without Flow, but then you can use the
-name of the class as a type.
+Flow 없이 쓰는 것과 동일하게 클래스를 작성하면 됩니다. 하지만 클래스 이름은 타입으로도 사용할 수 있습니다.
 
 ```js
 class MyClass {
@@ -16,17 +14,15 @@ class MyClass {
 let myInstance: MyClass = new MyClass();
 ```
 
-This is because classes in Flow are [nominally typed](../../lang/nominal-structural).
+이것은 Flow에서 클래스틑 [nomially typed](../../lang/nominal-structural)이기 때문입니다.
 
-## Class Syntax <a class="toc" id="toc-class-syntax" href="#toc-class-syntax"></a>
+## 클래스 문법 <a class="toc" id="toc-class-syntax" href="#toc-class-syntax"></a>
 
-Classes in Flow are identical to normal JavaScript classes, but with added
-types.
+Flow에서 클래스는 타입을 추가된 것 외에는 일반 자바스크립트 클래스와 동일합니다.
 
-##### Class Methods <a class="toc" id="toc-class-methods" href="#toc-class-methods"></a>
+##### 클래스 메서드 <a class="toc" id="toc-class-methods" href="#toc-class-methods"></a>
 
-Just like in functions, class methods can have annotations for both parameters
-(input) and returns (output).
+함수와 마찬가지로 클래서 메서드는 파라미터와 반환값에 대한 어노테이션을 가질 수 있습니다.
 
 ```js
 class MyClass {
@@ -34,10 +30,9 @@ class MyClass {
 }
 ```
 
-##### Class Fields (Properties) <a class="toc" id="toc-class-fields-properties" href="#toc-class-fields-properties"></a>
+##### 클래스 프로퍼티 <a class="toc" id="toc-class-fields-properties" href="#toc-class-fields-properties"></a>
 
-Whenever you want to use a class field in Flow you must first give it an
-annotation.
+Flow에서 클래스 필드를 사용할때마다 어노테이션을 먼저 기술해야 합니다.
 
 ```js
 // @flow
@@ -49,8 +44,7 @@ class MyClass {
 }
 ```
 
-Fields are annotated within the body of the class with the field name followed
-by a colon `:` and the type.
+필드는 클래스 안쪽에서 어노테이션을 가져야 하고 필드 이름 뒤에 `:` 그리고 타입을 적습니다.
 
 ```js
 // @flow
@@ -62,7 +56,7 @@ class MyClass {
 }
 ```
 
-Flow also supports using the [class properties syntax](https://tc39.github.io/proposal-class-public-fields/).
+Flow는 [클래스 속성 문법](https://tc39.github.io/proposal-class-public-fields/)을 지원합니다.
 
 ```js
 class MyClass {
@@ -70,8 +64,7 @@ class MyClass {
 }
 ```
 
-When using this syntax, you are not required to give it a type annotation. But
-you still can if you need to.
+이 문법을 사용할 때 타입 어노테이션 꼭 주어야 하는건 아니지만 필요하다면 줄 수 있습니다.
 
 ```js
 class MyClass {
@@ -79,9 +72,9 @@ class MyClass {
 }
 ```
 
-##### Class Generics <a class="toc" id="toc-class-generics" href="#toc-class-generics"></a>
+##### 클래스 제너릭 <a class="toc" id="toc-class-generics" href="#toc-class-generics"></a>
 
-Classes can also have their own [generics](../generics/).
+또한 클래스는 자기 자신의 [제너릭](../generics)을 가질 수 있습니다.
 
 ```js
 class MyClass<A, B, C> {
@@ -92,9 +85,7 @@ class MyClass<A, B, C> {
 }
 ```
 
-Class generics are [parameterized](../generics/#toc-parameterized-generics).
-When you use a class as a type you need to pass parameters for each of its
-generics.
+클래스 제너릭은 [parameterized](../generics/#toc-parameterized-generics)입니다. 클래스를 타입으로 사용할 때 각 제너릭에 대해 파라미터를 제공해야 합니다.
 
 ```js
 // @flow
