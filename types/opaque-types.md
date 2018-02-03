@@ -4,9 +4,6 @@ layout: guide
 
 Opaque 타입 별팅은 정의된 파일 밖으로 타입에 대한 접근을 허용하지 않는 타입 별칭입니다.
 
-Opaque type aliases are type aliases that do not allow access to their
-underlying type outside of the file in which they are defined.
-
 ```js
 opaque type ID = string;
 ```
@@ -33,8 +30,6 @@ opaque type Alias = Type;
 ```
 
 또안 선택적으로 이름 뒤에 `:`와 타입을 추가해서 opaque 타입 별칭에 subtyping constaint를 추가할 수 있습니다.
-
-You can optionally add a subtyping constraint to an opaque type alias by adding a colon `:` and a type after the name.
 
 ```js
 opaque type Alias: SuperType = Type;
@@ -119,8 +114,6 @@ function toID(x: string): ID {
 ```
 
 subtying constraint로 opaque 타입 별칭을 만들 때 타입 위체에 있는 타입은 슈퍼 타입 위치 안에 있는 타입의 슈퍼 타입이어야 한다.
-
-When you create an opaque type alias with a subtyping constraint, the type in the type position must be a subtype of the type in the super type position.
 
 ```js
 //@flow
