@@ -2,6 +2,8 @@
 layout: guide
 ---
 
+Opaque 타입 별팅은 정의된 파일 밖으로 타입에 대한 접근을 허용하지 않는 타입 별칭입니다.
+
 Opaque type aliases are type aliases that do not allow access to their
 underlying type outside of the file in which they are defined.
 
@@ -9,8 +11,7 @@ underlying type outside of the file in which they are defined.
 opaque type ID = string;
 ```
 
-Opaque type aliases, like regular type aliases, may be used anywhere a type can
-be used.
+보통 타입 별칭과 같이 Opaque 타입 별칭은 타입이 사용될 수 있는 어느 곳에서든 사용될 수 있습니다.
 
 
 ```js
@@ -23,10 +24,9 @@ function identity(x: ID): ID {
 export type {ID};
 ```
 
-## Opaque Type Alias Syntax <a class="toc" id="toc-opaque-type-alias-syntax" href="#toc-opaque-type-alias-syntax"></a>
+## Opaque 타입 별칭 문법 <a class="toc" id="toc-opaque-type-alias-syntax" href="#toc-opaque-type-alias-syntax"></a>
 
-Opaque type aliases are created using the words `opaque type` followed by its
-name, an equals sign `=`, and a type definition.
+Opaque 타입 별칭은 이름 뒤에 `opaque type`, `=` 그리고 타입 정의를 기술하면 됩니다.
 
 ```js
 opaque type Alias = Type;
