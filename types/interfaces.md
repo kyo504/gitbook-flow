@@ -2,9 +2,7 @@
 layout: guide
 ---
 
-Classes in Flow are nominally typed. This means that when you have two separate
-classes you cannot use one in place of the other even when they have the same
-exact properties and methods.
+Flow에서 클래스는 norminally types 됩니다. 이 말은 두개의 다른 클래스가 정확히 같은 함수와 프로퍼티를 가지더라도 하나의 타입을 다른 걸 대체하여 사용할 수 없다는 것입니다.
 
 ```js
 // @flow
@@ -20,8 +18,7 @@ class Bar {
 const foo: Foo = new Bar(); // Error!
 ```
 
-Instead, you can use `interface` in order to declare the structure of the class
-that you are expecting.
+대신, 기대하는 클래스 구조를 선언하기 위해서는 `interface`를 사용할 수 있습니다.
 
 ```js
 // @flow
@@ -41,9 +38,8 @@ const foo: Serializable = new Foo(); // Works!
 const bar: Serializable = new Bar(); // Works!
 ```
 
-You can also use `implements` to tell Flow that you want the class to match an
-interface. This prevents you from making incompatible changes when editing the
-class.
+또한 `interface`를 이용해서 Flow가 인터페이스와 매치되는 클래스를 원한다고 할 수 있다. 이는 클래스를 수정할 때 호환되지 않는 변화를 만드는 것을 방지한다.
+
 
 ```js
 // @flow
@@ -61,7 +57,7 @@ class Bar implements Serializable {
 }
 ```
 
-You can also use `implements` with multiple interfaces.
+또한 `interface`를 이용해서 여러 개의 인터페이스를 사용할 수 있다.
 
 ```js
 class Foo implements Bar, Baz {
@@ -69,10 +65,9 @@ class Foo implements Bar, Baz {
 }
 ```
 
-## Interface Syntax <a class="toc" id="toc-interface-syntax" href="#toc-interface-syntax"></a>
+## 인터페이스 문법 <a class="toc" id="toc-interface-syntax" href="#toc-interface-syntax"></a>
 
-Interfaces are created using the keyword `interface` followed by its name and
-a block which contains the body of the type definition.
+인터페이스는 `interface` 키워드를 사용해서 만드는데 `interface` 다음에 이름을 쓰고 타입 정의 부분을 기술하면 됩니다.
 
 ```js
 interface MyInterface {
@@ -80,12 +75,11 @@ interface MyInterface {
 }
 ```
 
-The syntax of the block matches the syntax of object types and has all of the
-same features.
+블록의 문법은 객체 타입의 문법 동일하며 모든 같은 기능들을 가지고 있습니다.
 
-##### Interface Methods <a class="toc" id="toc-interface-methods" href="#toc-interface-methods"></a>
+##### 인터페이스 메서드 <a class="toc" id="toc-interface-methods" href="#toc-interface-methods"></a>
 
-You can add methods to interfaces following the same syntax as object methods.
+객체 메서드와 동일하게 인터페이스에도 매서드를 추가할 수 있습니다.
 
 ```js
 interface MyInterface {
@@ -93,10 +87,9 @@ interface MyInterface {
 }
 ```
 
-##### Interface Properties <a class="toc" id="toc-interface-properties" href="#toc-interface-properties"></a>
+##### 인터페이스 프로퍼티 <a class="toc" id="toc-interface-properties" href="#toc-interface-properties"></a>
 
-You can add properties to interfaces following the same syntax as object
-properties.
+객체 프로퍼티와 동일하게 인터페이스에도 프로퍼티를 추가할 수 있습니다.
 
 ```js
 interface MyInterface {
@@ -104,7 +97,7 @@ interface MyInterface {
 }
 ```
 
-Interface properties can be optional as well.
+인터페이스 프로퍼티는 선택사항입니다.
 
 ```js
 interface MyInterface {
@@ -112,10 +105,9 @@ interface MyInterface {
 }
 ```
 
-##### Interfaces as maps <a class="toc" id="toc-interfaces-as-maps" href="#toc-interfaces-as-maps"></a>
+##### 맵 형태의 인터페이스 <a class="toc" id="toc-interfaces-as-maps" href="#toc-interfaces-as-maps"></a>
 
-You can create ["indexer properties"](../objects/#toc-objects-as-maps) the same
-way as with objects.
+객체와 동일한 방법으로 ["인덱서 프로퍼티"](../objects/#toc-objects-as-maps)를 생성할 수 있습니다.
 
 ```js
 interface MyInterface {
@@ -123,9 +115,9 @@ interface MyInterface {
 }
 ```
 
-#### Interface Generics <a class="toc" id="toc-interface-generics" href="#toc-interface-generics"></a>
+#### 인터페이스 제너릭 <a class="toc" id="toc-interface-generics" href="#toc-interface-generics"></a>
 
-Interfaces can also have their own [generics](../generics/).
+인터페이스도 자기 자신의 [제너릭](../generics)를 가질 수 있습니다.
 
 ```js
 interface MyInterface<A, B, C> {
@@ -134,8 +126,7 @@ interface MyInterface<A, B, C> {
 }
 ```
 
-Interface generics are [parameterized](../generics/#toc-parameterized-generics).
-When you use an interface you need to pass parameters for each of its generics.
+인터페이스 제너릭은 [parameterized](../generics/#toc-parameterized-generics) 됩니다. 인터페이스를 사용할 때 각각의 제너릭에 대한 파라미터를 전달해야 합니다.
 
 ```js
 // @flow
@@ -154,11 +145,9 @@ var val: MyInterface<number, boolean, string> = {
 
 <!-- [TODO: Overloading interface methods -->
 
-## Interface property variance (read-only and write-only) <a class="toc" id="toc-interface-property-variance-read-only-and-write-only" href="#toc-interface-property-variance-read-only-and-write-only"></a>
+## 인터페이스 내부의 읽기 전용 혹은 쓰기 전용 프로퍼티 <a class="toc" id="toc-interface-property-variance-read-only-and-write-only" href="#toc-interface-property-variance-read-only-and-write-only"></a>
 
-Interface properties are [invariant](../../lang/variance/) by default. But you
-can add modifiers to make them covariant (read-only) or contravariant
-(write-only).
+인터페이스 프로퍼티는 기본적으로 [invariant](../../lang/variance/) 입니다. 그러나 수정자를 추가해서 읽기 전용(covariant)이나 쓰기 전용(contravariant)으로 만들 수 있습니다.
 
 ```js
 interface MyInterface {
@@ -167,10 +156,9 @@ interface MyInterface {
 }
 ```
 
-#### Covariant (read-only) properties on interfaces <a class="toc" id="toc-covariant-read-only-properties-on-interfaces" href="#toc-covariant-read-only-properties-on-interfaces"></a>
+#### 읽기 전용 (read-only) 프로퍼티 <a class="toc" id="toc-covariant-read-only-properties-on-interfaces" href="#toc-covariant-read-only-properties-on-interfaces"></a>
 
-You can make a property covariant by adding a plus symbol `+` in front of the
-property name.
+프로퍼티를 읽기 전용으로 만들기 위해서는 프로퍼티 이름 앞에 `+` 심볼을 더하면 됩니다.
 
 ```js
 interface MyInterface {
@@ -178,7 +166,7 @@ interface MyInterface {
 }
 ```
 
-This allows you to pass a more specific type in place of that property.
+이는 해당 프로퍼티 대신 더 상세한 타입을 전달하도록 합니다.
 
 ```js
 // @flow
@@ -190,8 +178,7 @@ var value1: Invariant = { property: 42 }; // Error!
 var value2: Covariant = { readOnly: 42 }; // Works!
 ```
 
-Because of how covariance works, covariant properties also become read-only
-when used. Which can be useful over normal properties.
+또한 읽기 전용이 동작하는 방법 때문에 일기 전용 프로퍼티는 사용될 때 읽기 전용이 됩니다. 이는 일반 프로퍼티에 비해 유용합니다.
 
 ```js
 // @flow
@@ -210,10 +197,9 @@ function method2(value: Covariant) {
 }
 ```
 
-#### Contravariant (write-only) properties on interfaces <a class="toc" id="toc-contravariant-write-only-properties-on-interfaces" href="#toc-contravariant-write-only-properties-on-interfaces"></a>
+#### 쓰기 전용 (write-only) 프로퍼티 <a class="toc" id="toc-contravariant-write-only-properties-on-interfaces" href="#toc-contravariant-write-only-properties-on-interfaces"></a>
 
-You can make a property contravariant by adding a minus symbol - in front of
-the property name.
+프로퍼티를 쓰기 전용으로 만들기 위해서는 프로퍼티 이름 앞에 `-` 심볼을 더하면 됩니다.
 
 ```js
 interface InterfaceName {
@@ -221,7 +207,7 @@ interface InterfaceName {
 }
 ```
 
-This allows you to pass a less specific type in place of that property.
+이는 해당 프로퍼티 대신 더 상세한 타입을 전달하도록 합니다.
 
 ```js
 // @flow
@@ -235,8 +221,7 @@ var value1: Invariant     = { property: numberOrString };  // Error!
 var value2: Contravariant = { writeOnly: numberOrString }; // Works!
 ```
 
-Because of how contravariance works, contravariant properties also become
-write-only when used. Which can be useful over normal properties.
+또한 쓰기 전용이 동작하는 방법 때문에 일기 전용 프로퍼티는 사용될 때 쓰기 전용이 됩니다. 이는 일반 프로퍼티에 비해 유용합니다.
 
 ```js
 interface Invariant     {   property: number }
