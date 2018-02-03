@@ -32,14 +32,15 @@ Opaque 타입 별칭은 이름 뒤에 `opaque type`, `=` 그리고 타입 정의
 opaque type Alias = Type;
 ```
 
-You can optionally add a subtyping constraint to an opaque type alias by adding
-a colon `:` and a type after the name.
+또안 선택적으로 이름 뒤에 `:`와 타입을 추가해서 opaque 타입 별칭에 subtyping constaint를 추가할 수 있습니다.
+
+You can optionally add a subtyping constraint to an opaque type alias by adding a colon `:` and a type after the name.
 
 ```js
 opaque type Alias: SuperType = Type;
 ```
 
-Any type can appear as the super type or type of an opaque type alias. 
+어떤 타입이든 슈퍼 타입 혹은 opaque 타입 별팅으로 나타낼 수 있습니다.
 
 ```js
 opaque type StringAlias = string;
@@ -52,12 +53,11 @@ opaque type AliasAlias: ObjectAlias = ObjectAlias;
 opaque type VeryOpaque: AliasAlias = ObjectAlias;
 ```
 
-## Opaque Type Alias Type Checking <a class="toc" id="toc-opaque-type-alias-type-checking" href="#toc-opaque-type-alias-type-checking"></a>
+## Opaque 타입 별칭의 타입 검사 <a class="toc" id="toc-opaque-type-alias-type-checking" href="#toc-opaque-type-alias-type-checking"></a>
 
-#### Within the Defining File <a class="toc" id="toc-within-the-defining-file" href="#toc-within-the-defining-file"></a>
+#### 선언한 파일 내부에서 <a class="toc" id="toc-within-the-defining-file" href="#toc-within-the-defining-file"></a>
 
-When in the same file the alias is defined, opaque type aliases behave exactly
-as regular [type aliases](../aliases/) do.
+같은 파일에서 별칭이 정의되면 opaque 타입 별칭은 일반적인 [타입 별칭](../aliases)이 동작하는 것과 동일하게 동작합니다.
 
 ```js
 //@flow
@@ -72,11 +72,9 @@ function toNumberAlias(x: number): NumberAlias { return x; }
 function toNumber(x: NumberAlias): number { return x; }
 ```
 
-#### Outside the Defining File <a class="toc" id="toc-outside-the-defining-file" href="#toc-outside-the-defining-file"></a>
+#### 정의된 파일 외부에서 <a class="toc" id="toc-outside-the-defining-file" href="#toc-outside-the-defining-file"></a>
 
-When importing an opaque type alias, it behaves like a
-[nominal type](../../lang/nominal-structural/#toc-nominal-typing), hiding its
-underlying type.
+opaque 타입 별칭을 import 하면 기존 타입을 숨기고 [norminal type](../../lang/nominal-structural/#toc-nominal-typing) 같이 동작합니다.
 
 **`exports.js`**
 
@@ -98,8 +96,7 @@ function convert(x: NumberAlias): number {
 
 #### Subtyping Constraints <a class="toc" id="toc-subtyping-constraints" href="#toc-subtyping-constraints"></a>
 
-When you add a subtyping constraint to an opaque type alias, we allow the opaque
-type to be used as the super type when outside of the defining file.
+opque 타입 별칭에 subtying constraint를 추가하면 opaque 타입이 정의된 파일 외부에서 슈퍼 타입으로 사용될 수 있게 합니다.
 
 **`exports.js`**
 
@@ -121,8 +118,9 @@ function toID(x: string): ID {
 }
 ```
 
-When you create an opaque type alias with a subtyping constraint, the type in
-the type position must be a subtype of the type in the super type position.
+subtying constraint로 opaque 타입 별칭을 만들 때 타입 위체에 있는 타입은 슈퍼 타입 위치 안에 있는 타입의 슈퍼 타입이어야 한다.
+
+When you create an opaque type alias with a subtyping constraint, the type in the type position must be a subtype of the type in the super type position.
 
 ```js
 //@flow
@@ -130,10 +128,9 @@ opaque type Bad: string = number; // Error: number is not a subtype of string
 opaque type Good: {x: string} = {x: string, y: number};
 ```
 
-#### Generics <a class="toc" id="toc-generics" href="#toc-generics"></a>
+#### 제너릭 <a class="toc" id="toc-generics" href="#toc-generics"></a>
 
-Opaque type aliases can also have their own [generics](../generics/),
-and they work exactly as generics do in regular [type aliases](../aliases/#toc-type-alias-generics)
+또한 Opacue 타입 별칭은 자기 자신의 [제너릭](../generics)을 가질 수 있습니다. 그리고 일반 [타입 별칭](../aliases/#toc-type-alias-generics)에서의 제너릭과 동일하게 동작합니다.
 
 ```js
 // @flow
@@ -150,11 +147,9 @@ var val: MyObject<number, boolean, string> = {
 };
 ```
 
-#### Library Definitions <a class="toc" id="toc-library-definitions" href="#toc-library-definitions"></a>
+#### 라이브러리 정의 <a class="toc" id="toc-library-definitions" href="#toc-library-definitions"></a>
 
-You can also declare opaque type aliases in
-[libdefs](https://flow.org/en/docs/libdefs/). There, you omit the underlying
-type, but may still optionally include a super type.
+[libdefs](https://flow.org/en/docs/libdefs/)에 있는 opaque 타입 별칭을 선언할 수도 있습니다. 그러면 기본 타입은 생략할 수 있지만 여전히 선택적으로 슈퍼 타입을 포함할 수 있습니다.
 
 ```js
 declare opaque type Foo;
