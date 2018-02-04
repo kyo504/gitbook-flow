@@ -46,7 +46,7 @@ type UnionAlias = 1 | 2 | 3;
 type AliasAlias = ObjectAlias;
 ```
 
-#### 타입 별칭 제너릭 <a class="toc" id="toc-type-alias-generics" href="#toc-type-alias-generics"></a>
+#### 타입 별칭 제네릭 <a class="toc" id="toc-type-alias-generics" href="#toc-type-alias-generics"></a>
 
 타입 별칭은 자기 자신의 [generics](../generics)를 가질 수 있습니다.
 
@@ -57,7 +57,7 @@ type MyObject<A, B, C> = {
 };
 ```
 
-타입 별칭 제너릭은 [parameterized](../generics/#toc-parameterized-generics)될 수 있습니다. 타입 별칭을 사용할 때 각 제너릭에 대한 파라미터를 전달해야 합니다.
+타입 별칭 제네릭은 [parameterized](../generics/#toc-parameterized-generics)될 수 있습니다. 타입 별칭을 사용할 때 각 제네릭에 대한 파라미터를 전달해야 합니다.
 
 ```js
 // @flow

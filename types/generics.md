@@ -2,11 +2,9 @@
 layout: guide
 ---
 
-Generics (sometimes referred to as polymorphic types) are a way of abstracting
-a type away.
+제네릭(때로는 다형성 타입으로 불리는)은 타입을 추상화하는 방법입니다.
 
-Imagine writing the following `identity` function which returns whatever value
-was passed.
+아래 전달받은 함수를 그대로 반환하는 `identity` 함수를 작성한다고 생각해보죠.
 
 ```js
 function identity(value) {
@@ -14,8 +12,7 @@ function identity(value) {
 }
 ```
 
-We would have a lot of trouble trying to write specific types for this function
-since it could be anything.
+타입이 어떤 것이든 될 수 있기 때문에 이 함수에 대해 특정 타입을 기술하는데 어려움을 겪을 수 있습니다.
 
 ```js
 function identity(value: string): string {
@@ -23,8 +20,7 @@ function identity(value: string): string {
 }
 ```
 
-Instead we can create a generic (or polymorphic type) in our function and use
-it in place of other types.
+대신 함수안에 제네릭을 만들고 다른 타입을 대신해서 사용할 수 있습니다.
 
 ```js
 function identity<T>(value: T): T {
@@ -32,20 +28,17 @@ function identity<T>(value: T): T {
 }
 ```
 
-Generics can be used within functions, function types, classes, type aliases,
-and interfaces.
+제네릭은 함수, 함수 타입, 클래스, 타입 별칭, 그리고 인터페이스에서 사용할 수 있습니다.
 
-### Syntax of generics <a class="toc" id="toc-syntax-of-generics" href="#toc-syntax-of-generics"></a>
+### 제네릭 문법 <a class="toc" id="toc-syntax-of-generics" href="#toc-syntax-of-generics"></a>
 
-There are a number of different places where generic types appear in syntax.
+제네릭을 문법적으로 표현하는 여러가지 방법이 있습니다.
 
-##### Functions with generics <a class="toc" id="toc-functions-with-generics" href="#toc-functions-with-generics"></a>
+##### 함수 제네릭 <a class="toc" id="toc-functions-with-generics" href="#toc-functions-with-generics"></a>
 
-Functions can create generics by adding the type parameter list `<T>` before
-the function parameter list.
+함수는 파라미터 목록 앞에 타입 파라미터 목록 `<T>`를 붙여서 제네릭을 생성할 수 있습니다.
 
-You can use generics in the same places you'd add any other type in a function
-(parameter or return types).
+함수 내부의 파미미터 혹은 반환 타입같은 다른 타입에도 제네릭을 사용할 수 있습니다.
 
 ```js
 function method<T>(param: T): T {
@@ -57,19 +50,17 @@ function<T>(param: T): T {
 }
 ```
 
-##### Function types with generics <a class="toc" id="toc-function-types-with-generics" href="#toc-function-types-with-generics"></a>
+##### 함수 타입 제네릭 <a class="toc" id="toc-function-types-with-generics" href="#toc-function-types-with-generics"></a>
 
-Function types can create generics in the same way as normal functions, by
-adding the type parameter list `<T>` before the function type parameter list.
+함수 타입은 일반 함수처럼 타입 파라미터 목록 앞에 타입 파라미터 목록 `<T>`를 추가해서 제네릭을 생성할 수 있습니다.
 
-You can use generics in the same places you'd add any other type in a function
-type (parameter or return types).
+함수 내부의 파미미터 혹은 반환 타입같은 다른 타입에도 제네릭을 사용할 수 있습니다.
 
 ```js
 <T>(param: T) => T
 ```
 
-Which then gets used as its own type.
+이렇게 생성된 함수 타입 제네릭은 자신의 타입으로 사용됩니다.
 
 ```js
 function method(func: <T>(param: T) => T) {
@@ -77,10 +68,9 @@ function method(func: <T>(param: T) => T) {
 }
 ```
 
-##### Classes with generics <a class="toc" id="toc-classes-with-generics" href="#toc-classes-with-generics"></a>
+##### 클래스 제네릭 <a class="toc" id="toc-classes-with-generics" href="#toc-classes-with-generics"></a>
 
-Classes can create generics by placing the type parameter list before the body
-of the class.
+클래스는 클래스 이름 뒤에 타입 파마리터 목록을 추가해서 제네릭을 만들 수 있습니다.
 
 ```js
 class Item<T> {
@@ -88,8 +78,7 @@ class Item<T> {
 }
 ```
 
-You can use generics in the same places you'd add any other type in a class
-(property types and method parameter/return types).
+클래스 안에 있는 프로퍼티 타입, 메서드 파라미터 타입, 반환 타입도 같은 방법으로 제네릭을 사용할 수 있습니다.
 
 ```js
 class Item<T> {
@@ -105,7 +94,7 @@ class Item<T> {
 }
 ```
 
-##### Type aliases with generics <a class="toc" id="toc-type-aliases-with-generics" href="#toc-type-aliases-with-generics"></a>
+##### 타입 별칭 제네릭 <a class="toc" id="toc-type-aliases-with-generics" href="#toc-type-aliases-with-generics"></a>
 
 ```js
 type Item<T> = {
@@ -114,7 +103,7 @@ type Item<T> = {
 };
 ```
 
-##### Interfaces with generics <a class="toc" id="toc-interfaces-with-generics" href="#toc-interfaces-with-generics"></a>
+##### 인터페이스 제네릭 <a class="toc" id="toc-interfaces-with-generics" href="#toc-interfaces-with-generics"></a>
 
 ```js
 interface Item<T> {
@@ -123,12 +112,11 @@ interface Item<T> {
 }
 ```
 
-## Behavior of generics <a class="toc" id="toc-behavior-of-generics" href="#toc-behavior-of-generics"></a>
+## 제네릭의 동작 방식 <a class="toc" id="toc-behavior-of-generics" href="#toc-behavior-of-generics"></a>
 
-#### Generics act like variables <a class="toc" id="toc-generics-act-like-variables" href="#toc-generics-act-like-variables"></a>
+#### 제네릭은 변수같은 역할을 한다 <a class="toc" id="toc-generics-act-like-variables" href="#toc-generics-act-like-variables"></a>
 
-Generic types work a lot like variables or function parameters except that they
-are used for types. You can use them whenever they are in scope.
+제네릭 타입은 타입으로 사용된다는 점 외에는 변수 혹은 함수 파라미터와 매우 유사하게 동작합니다. 스코프 안에서 언제든지 사용할 수 있습니다.
 
 ```js
 function constant<T>(value: T) {
@@ -138,10 +126,9 @@ function constant<T>(value: T) {
 }
 ```
 
-#### Create as many generics as you need <a class="toc" id="toc-create-as-many-generics-as-you-need" href="#toc-create-as-many-generics-as-you-need"></a>
+#### 필요한 만큼 제네릭을 생성하라 <a class="toc" id="toc-create-as-many-generics-as-you-need" href="#toc-create-as-many-generics-as-you-need"></a>
 
-You can have as many of these generics as you need in the type parameter list,
-naming them whatever you want:
+이름을 무엇으로 하든 필요한 곳 어디든 원하는 만큼 제네릭을 사용할 수 있습니다.
 
 ```js
 function identity<One, Two, Three>(one: One, two: Two, three: Three) {
@@ -149,10 +136,9 @@ function identity<One, Two, Three>(one: One, two: Two, three: Three) {
 }
 ```
 
-#### Generics track values around <a class="toc" id="toc-generics-track-values-around" href="#toc-generics-track-values-around"></a>
+#### 제네릭은 값을 추적한다 <a class="toc" id="toc-generics-track-values-around" href="#toc-generics-track-values-around"></a>
 
-When using a generic type for a value, Flow will track the value and make sure
-that you aren't replacing it with something else.
+어떤 값에 대해 제네릭 타입을 사용하면 Flow는 값을 추적하고 해당 값이 다른 무언가로 바뀌지 않는지 확인합니다.
 
 ```js
 // @flow
@@ -169,8 +155,7 @@ function identity<T>(value: T): T {
 }
 ```
 
-Flow tracks the specific type of the value you pass through a generic, letting
-you use it later.
+Flow는 제네릭을 통해 전달한 값의 특정 타입을 추적하고 나중에 그것을 사용하도록 합니다.
 
 ```js
 // @flow
@@ -184,10 +169,9 @@ let two: 2 = identity(2);
 let three: 3 = identity(42);
 ```
 
-#### Adding types to generics <a class="toc" id="toc-adding-types-to-generics" href="#toc-adding-types-to-generics"></a>
+#### 제네릭에 타입 추가 <a class="toc" id="toc-adding-types-to-generics" href="#toc-adding-types-to-generics"></a>
 
-Similar to  `mixed`, generics have an "unknown" type. You're not allowed to use
-a generic as if it were a specific type.
+`mixed`와 비슷하게 제네릭도 "알려지지 않은" 타입을 가집니다. 제네릭을 특정 타입인 것처럼 사용할 수는 없습니다.
 
 ```js
 // @flow
@@ -197,6 +181,8 @@ function logFoo<T>(obj: T): T {
   return obj;
 }
 ```
+
+이때 타입을 구체화 할 수 있습니다, 그러나 제네릭은 여전히 어떤 타입이든 허용하게 됩니다.
 
 You could refine the type, but the generic will still allow any type to be
 passed in.
@@ -214,8 +200,7 @@ logFoo({ foo: 'foo', bar: 'bar' });  // Works.
 logFoo({ bar: 'bar' }); // Works. :(
 ```
 
-Instead, you could add a type to your generic like you would with a function
-parameter.
+대신, 함수 파라미터를 쓰는 것처럼 제네릭에 타입을 추가할 수 있습니다.
 
 ```js
 // @flow
@@ -229,8 +214,7 @@ logFoo({ foo: 'foo', bar: 'bar' });  // Works!
 logFoo({ bar: 'bar' }); // Error!
 ```
 
-This way you can keep the behavior of generics while only allowing certain
-types to be used.
+이런식으로, 사용될 특정 타입을 허용하면서도 제네릭의 특징을 유지할 수 있습니다.
 
 ```js
 // @flow
@@ -244,7 +228,7 @@ let two: 2 = identity(2);
 let three: "three" = identity("three");
 ```
 
-#### Generic types act as bounds <a class="toc" id="toc-generic-types-act-as-bounds" href="#toc-generic-types-act-as-bounds"></a>
+#### 제네릭 타입은 경계 역할을 한다 <a class="toc" id="toc-generic-types-act-as-bounds" href="#toc-generic-types-act-as-bounds"></a>
 
 ```js
 // @flow
@@ -256,9 +240,7 @@ let foo: 'foo' = 'foo';           // Works!
 let bar: 'bar' = identity('bar'); // Works!
 ```
 
-In Flow, most of the time when you pass one type into another you lose the
-original type. So that when you pass a specific type into a less specific one
-Flow "forgets" it was once something more specific.
+Flow에서 어떤 타입을 다른 타입으로 전달하는 경우에 대부분 원래 타입을 잃어버리게 됩니다. 그래서 특정 타입을 덜 상세한 타입으로 전달하게 되면 Flow는 더 상세했던 시기를 "잃어버립니다".
 
 ```js
 // @flow
@@ -271,8 +253,8 @@ let foo: 'foo' = 'foo';           // Works!
 let bar: 'bar' = identity('bar'); // Error!
 ```
 
-Generics allow you to hold onto the more specific type while adding a
-constraint. In this way types on generics act as "bounds".
+제네릭은 제약을 추가하면 더욱 상세한 타입으로 유지되도록 합니다. 이런 방식으로 제네릭에서 타입은 "경계" 역할을 합니다.
+
 
 ```js
 // @flow
@@ -284,8 +266,7 @@ let foo: 'foo' = 'foo';           // Works!
 let bar: 'bar' = identity('bar'); // Works!
 ```
 
-Note that when you have a value with a bound generic type, you can't use it as
-if it were a more specific type.
+경계를 가진 제네릭 타입의 값이 있을 때 더 상세한 타입인 것처럼 사용할 수 없다는 것을 알아두세요.
 
 ```js
 // @flow
@@ -299,13 +280,11 @@ function identity<T: string>(val: T): T {
 identity('bar');
 ```
 
-#### Parameterized generics <a class="toc" id="toc-parameterized-generics" href="#toc-parameterized-generics"></a>
+#### 매개변수화 된 제네릭 <a class="toc" id="toc-parameterized-generics" href="#toc-parameterized-generics"></a>
 
-Generics sometimes allow you to pass types in like arguments to a function.
-These are known as parameterized generics (or parametric polymorphism).
+때때로 제네릭은 함수에 인자를 전달하는 것처럼 타입을 전달할 수 있게 해줍니다. 이를 매개변수화 된 제네릭이라고 합니다.
 
-For example, a type alias with a generic is parameterized. When you go to use
-it you will have to provide a type argument.
+예를 들어, 제네릭을 가진 타입 별칭은 매개변수화됩니다. 타입 별칭을 사용하려고 할 때 타입 인자를 제공해야 합니다.
 
 ```js
 type Item<T> = {
@@ -317,14 +296,11 @@ let item: Item<string> = {
 };
 ```
 
-You can think of this like passing arguments to a function, only the return
-value is a type that you can use.
+이것은 인자를 함수에 전달하는 것처럼 생각할 수 있으며 반환 값만 타입으로 사용할 수 있습니다.
 
-Classes (when being used as a type), type aliases, and interfaces all require
-that you pass type arguments. Functions and function types do not have
-parameterized generics.
+타입으로 사용되는 클래스, 타입 별칭 그리고 인터페이스 모두 타입 인자를 전달해야 합니다. 함수와 함수 타입은 매개변수화된 제네릭을 가지지 않습니다.
 
-***Classes***
+***클래스***
 
 ```js
 // @flow
@@ -340,7 +316,7 @@ let item1: Item<number> = new Item(42); // Works!
 let item2: Item = new Item(42); // Error!
 ```
 
-***Type Aliases***
+***타입 별칭***
 
 ```js
 // @flow
@@ -353,7 +329,7 @@ let item1: Item<number> = { prop: 42 }; // Works!
 let item2: Item = { prop: 42 }; // Error!
 ```
 
-***Interfaces***
+***인터페이스***
 
 ```js
 // @flow
@@ -370,10 +346,9 @@ class Item {
 (Item.prototype: HasProp); // Error!
 ```
 
-##### Adding defaults to parameterized generics <a class="toc" id="toc-adding-defaults-to-parameterized-generics" href="#toc-adding-defaults-to-parameterized-generics"></a>
+##### 기본 타입을 매개변수화 된 제네릭에 추가하기 <a class="toc" id="toc-adding-defaults-to-parameterized-generics" href="#toc-adding-defaults-to-parameterized-generics"></a>
 
-You can also provide defaults for parameterized generics just like parameters
-of a function.
+함수의 파라미터처럼 기본 타입을 매개변수화 된 제네릭에 추가할 수 있습니다.
 
 ```js
 type Item<T: number = 1> = {
@@ -384,5 +359,4 @@ let foo: Item<> = { prop: 1 };
 let bar: Item<2> = { prop: 2 };
 ```
 
-You must always include the brackets `<>` when using the type (just like
-parentheses for a function call).
+함수 호출할 때 괄호를 쓰는 것처럼 타입을 사용할 때 `<>`을 포함해야 합니다.

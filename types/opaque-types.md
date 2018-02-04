@@ -121,9 +121,9 @@ opaque type Bad: string = number; // Error: number is not a subtype of string
 opaque type Good: {x: string} = {x: string, y: number};
 ```
 
-#### 제너릭 <a class="toc" id="toc-generics" href="#toc-generics"></a>
+#### 제네릭 <a class="toc" id="toc-generics" href="#toc-generics"></a>
 
-또한 Opacue 타입 별칭은 자기 자신의 [제너릭](../generics)을 가질 수 있습니다. 그리고 일반 [타입 별칭](../aliases/#toc-type-alias-generics)에서의 제너릭과 동일하게 동작합니다.
+또한 Opacue 타입 별칭은 자기 자신의 [제네릭](../generics)을 가질 수 있습니다. 그리고 일반 [타입 별칭](../aliases/#toc-type-alias-generics)에서의 제네릭과 동일하게 동작합니다.
 
 ```js
 // @flow

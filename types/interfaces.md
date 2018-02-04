@@ -115,9 +115,9 @@ interface MyInterface {
 }
 ```
 
-#### 인터페이스 제너릭 <a class="toc" id="toc-interface-generics" href="#toc-interface-generics"></a>
+#### 인터페이스 제네릭 <a class="toc" id="toc-interface-generics" href="#toc-interface-generics"></a>
 
-인터페이스도 자기 자신의 [제너릭](../generics)를 가질 수 있습니다.
+인터페이스도 자기 자신의 [제네릭](../generics)를 가질 수 있습니다.
 
 ```js
 interface MyInterface<A, B, C> {
@@ -126,7 +126,7 @@ interface MyInterface<A, B, C> {
 }
 ```
 
-인터페이스 제너릭은 [parameterized](../generics/#toc-parameterized-generics) 됩니다. 인터페이스를 사용할 때 각각의 제너릭에 대한 파라미터를 전달해야 합니다.
+인터페이스 제네릭은 [매개변수화](../generics/#toc-parameterized-generics)될 수 있습니다. 인터페이스를 사용할 때 각각의 제네릭에 대한 파라미터를 전달해야 합니다.
 
 ```js
 // @flow
