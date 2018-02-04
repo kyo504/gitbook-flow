@@ -85,7 +85,7 @@ class MyClass<A, B, C> {
 }
 ```
 
-클래스 제네릭은 [매개변수화](../generics/#toc-parameterized-generics)됩니다. 클래스를 타입으로 사용할 때 각 제네릭에 대해 파라미터를 제공해야 합니다.
+클래스 제네릭은 [매개변수화](../generics/#toc-parameterized-generics)될 수 있습니다. 클래스를 타입으로 사용할 때 각 제네릭에 대해 파라미터를 제공해야 합니다.
 
 ```js
 // @flow
